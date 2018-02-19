@@ -1,5 +1,6 @@
 package by.home.spring;
 
+import by.home.spring.config.AppConfig;
 import by.home.spring.entity.CarEntity;
 import by.home.spring.service.CarService;
 import by.home.spring.service.impl.CarServiceImpl;
@@ -8,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class Main {
 
     public static void main(final String[] args) throws Exception {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext("by.home.spring.config");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         CarService service = context.getBean(CarServiceImpl.class);
 
@@ -22,7 +23,7 @@ public class Main {
         CarEntity car2 = new CarEntity();
         car2.setMark("UAZ");
         car2.setRegNumber("2523-KH-3");
-        car2.setMileage(9999999);
+        car2.setMileage(91);
 
         System.out.println(service.addCar(car2) != null ? "done! Car added" : "error...");
 
