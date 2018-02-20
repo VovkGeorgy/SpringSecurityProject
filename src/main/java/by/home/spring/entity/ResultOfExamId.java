@@ -4,6 +4,9 @@ import javax.persistence.Embeddable;
 import javax.persistence.ManyToOne;
 import java.io.Serializable;
 
+/**
+ * annotation Embeddable indicate a class whose instances and stored as an part of the owner-object (ResultOfExamId)
+ */
 @Embeddable
 public class ResultOfExamId implements Serializable {
 

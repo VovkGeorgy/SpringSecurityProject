@@ -12,7 +12,7 @@ public interface StudentService {
 
     int updateStudentEntityYearsOld(int studentYearsOld, String studentFio);
 
-    void deleteByStudentId(Integer Id);
+    StudentEntity deleteByStudentId(Integer Id);
 
     List<StudentEntity> findAll();
 }

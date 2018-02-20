@@ -1,12 +1,11 @@
 package by.home.spring.service;
 
-import by.home.spring.entity.CarEntity;
 import by.home.spring.entity.ExamEntity;
 
 import java.util.List;
 
 public interface ExamService {
-    ExamEntity addExam(ExamEntity exam);
+    ExamEntity saveAndFlush(ExamEntity exam);
 
     ExamEntity getOne(Integer eId);
 

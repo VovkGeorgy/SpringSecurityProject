@@ -1,24 +1,21 @@
 package by.home.spring.service.impl;
 
-import by.home.spring.entity.ExamEntity;
 import by.home.spring.entity.ResultOfExamEntity;
 import by.home.spring.repository.ResultOfExamEntityRepository;
-import by.home.spring.service.ResultOfExamServise;
+import by.home.spring.service.ResultOfExamService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
-public class ResultOfExamServiceImpl implements ResultOfExamServise {
+public class ResultOfExamServiceImpl implements ResultOfExamService {
 
     @Autowired
     ResultOfExamEntityRepository repository;
 
     @Override
-    public ResultOfExamEntity addResultOfExam(ResultOfExamEntity resultOfExam) {
+    public ResultOfExamEntity saveAndFlush(ResultOfExamEntity resultOfExam) {
         return repository.saveAndFlush(resultOfExam);
     }
 

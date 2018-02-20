@@ -6,7 +6,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 public interface CarService {
-    CarEntity addCar(CarEntity car);
+    CarEntity saveAndFlush(CarEntity car);
 
     CarEntity getOne(Integer id);
 

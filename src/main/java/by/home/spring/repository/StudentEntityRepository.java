@@ -44,7 +44,7 @@ public interface StudentEntityRepository extends JpaRepository<StudentEntity, In
      * @return StudentEntity
      */
     @Transactional
-    void deleteByStudentId(Integer studentId);
+    StudentEntity deleteByStudentId(Integer studentId);
 
     /**
      * This method return all Student Entity

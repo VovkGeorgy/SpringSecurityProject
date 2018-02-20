@@ -33,14 +33,7 @@ public class StudentController {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 
-    @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
-    @ResponseBody
-    public List<StudentEntity> getStudentsNames(ModelMap model) {
-        return studentService.findAll();
-    }
-
     @RequestMapping(value = "/addEntity", method = RequestMethod.POST)
-    @ResponseBody
     public String getStudentEntity(String fio, int workGroup, int yearsOld, int teacherId) {
         StudentEntity stud = new StudentEntity();
         logger.debug("Create new object StudentEntity", stud);
@@ -58,12 +51,27 @@ public class StudentController {
         return "student added" + stud;
     }
 
+    @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
+    public List<StudentEntity> getStudentsNames(ModelMap model) {
+        return studentService.findAll();
+    }
+
     @RequestMapping(value = "/getNames", method = RequestMethod.GET)
-    @ResponseBody
     public String getNames(ModelMap model) {
         Locale ruLocale = new Locale("ru", "RU");
         Locale.setDefault(ruLocale);
         return messageSource.getMessage("customer.name", new Object[]{"25"}, Locale.getDefault());
     }
 
+    @RequestMapping(value = "/updateEntity", method = RequestMethod.POST)
+    public String updateSudentEntity(int yearsOld, String fio, ModelMap model) {
+        studentService.updateStudentEntityYearsOld(yearsOld, fio);
+        return "Student yearsOld are updated!";
+    }
+
+    @RequestMapping(value = "/deleteEntity", method = RequestMethod.POST)
+    public String deleteStudentEntity(int studId) {
+        return "Entity - " + studentService.deleteByStudentId(studId) + "was deleted";
+
+    }
 }

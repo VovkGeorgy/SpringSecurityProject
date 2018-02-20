@@ -14,7 +14,7 @@ public class CarServiceImpl implements CarService {
     @Autowired
     CarEntityRepository repository;
 
-    public CarEntity addCar(CarEntity car) {
+    public CarEntity saveAndFlush(CarEntity car) {
         return repository.saveAndFlush(car);
     }
 

@@ -5,9 +5,9 @@ import by.home.spring.entity.ResultOfExamEntity;
 
 import java.util.List;
 
-public interface ResultOfExamServise {
+public interface ResultOfExamService {
 
-    ResultOfExamEntity addResultOfExam(ResultOfExamEntity resultOfExam);
+    ResultOfExamEntity saveAndFlush(ResultOfExamEntity resultOfExam);
 
     ResultOfExamEntity getOne(Integer id);
 

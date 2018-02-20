@@ -18,6 +18,11 @@ public class ResultOfExamEntity implements Serializable {
     public ResultOfExamEntity() {
     }
 
+    /**
+     * This method return field of object whose is an instance of a nested class
+     *
+     * @return pk
+     */
     @EmbeddedId
     public ResultOfExamId getPk() {
         return pk;

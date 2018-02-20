@@ -18,14 +18,14 @@ public class Main {
         car1.setRegNumber("JH-272-2");
         car1.setMileage(12121212);
 
-        System.out.println(service.addCar(car1) != null ? "done! Car added" : "error...");
+        System.out.println(service.saveAndFlush(car1) != null ? "done! Car added" : "error...");
 
         CarEntity car2 = new CarEntity();
         car2.setMark("UAZ");
         car2.setRegNumber("2523-KH-3");
         car2.setMileage(91);
 
-        System.out.println(service.addCar(car2) != null ? "done! Car added" : "error...");
+        System.out.println(service.saveAndFlush(car2) != null ? "done! Car added" : "error...");
 
         car2 = service.findByCarId(9);
 

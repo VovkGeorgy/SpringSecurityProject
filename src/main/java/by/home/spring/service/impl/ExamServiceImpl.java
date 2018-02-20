@@ -14,7 +14,7 @@ public class ExamServiceImpl implements ExamService {
     @Autowired
     ExamEntityRepository repository;
 
-    public ExamEntity addExam(ExamEntity exam) {
+    public ExamEntity saveAndFlush(ExamEntity exam) {
         return repository.saveAndFlush(exam);
     }
 

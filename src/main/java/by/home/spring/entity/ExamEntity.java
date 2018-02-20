@@ -1,5 +1,7 @@
 package by.home.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -58,6 +60,7 @@ public class ExamEntity implements Serializable {
         this.ticketNumber = ticketNumber;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.exam")
     public Set<ResultOfExamEntity> getResultOfExam() {
         return this.resultOfExam;

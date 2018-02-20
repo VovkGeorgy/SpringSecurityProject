@@ -1,5 +1,7 @@
 package by.home.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 
@@ -26,6 +28,7 @@ public class CarEntity {
         this.carId = carId;
     }
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
     @PrimaryKeyJoinColumn
     public TeacherEntity getTeacher() {
