@@ -3,6 +3,7 @@ package by.home.spring.repository;
 import by.home.spring.entity.TeacherEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface TeacherEntityRepository extends JpaRepository<TeacherEntity, Integer> {
 
@@ -40,5 +41,6 @@ public interface TeacherEntityRepository extends JpaRepository<TeacherEntity, In
      * @param teacherId - Student entity
      * @return TeacherEntity
      */
+    @Transactional
     TeacherEntity deleteByTeacherId(Integer teacherId);
 }

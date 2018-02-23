@@ -31,12 +31,12 @@ public class CarController {
     private static final Logger logger = LoggerFactory.getLogger(CarController.class);
 
     @RequestMapping(value = "/addEntity", method = RequestMethod.POST)
-    public String getCarEntity(String mark, String regNumber, int milleage, int teacherId) {
+    public String getCarEntity(String mark, String regNumber, int mileage, int teacherId) {
         CarEntity car = new CarEntity();
         logger.debug("Create new object CarEntity", car);
         car.setMark(mark);
         car.setRegNumber(regNumber);
-        car.setMileage(milleage);
+        car.setMileage(mileage);
         try {
             if (teacherService.getOne(teacherId) == null) throw new Exception();
         } catch (Exception e) {

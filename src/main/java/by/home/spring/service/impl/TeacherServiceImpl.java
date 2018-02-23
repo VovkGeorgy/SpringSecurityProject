@@ -6,11 +6,18 @@ import by.home.spring.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TeacherServiceImpl implements TeacherService {
 
     @Autowired
     TeacherEntityRepository repository;
+
+    @Override
+    public List<TeacherEntity> findAll() {
+        return repository.findAll();
+    }
 
     @Override
     public TeacherEntity saveAndFlush(TeacherEntity teacher) {

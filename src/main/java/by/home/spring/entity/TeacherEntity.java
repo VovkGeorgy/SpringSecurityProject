@@ -1,5 +1,7 @@
 package by.home.spring.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
@@ -79,6 +81,7 @@ public class TeacherEntity {
         this.car = car;
     }
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "teacher")
     public Set<StudentEntity> getStudent() {
         return this.student;
@@ -88,6 +91,7 @@ public class TeacherEntity {
         this.student = student;
     }
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY, mappedBy = "teacher", cascade = CascadeType.ALL)
     public CarEntity getCar() {
         return this.car;
