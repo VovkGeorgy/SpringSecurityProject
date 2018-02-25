@@ -1,5 +1,6 @@
 package by.home.spring.config;
 
+import com.fasterxml.jackson.core.json.UTF8JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Locale;
 
 @Configuration
 @EnableWebMvc
@@ -25,7 +27,6 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
         converter.setObjectMapper(new ObjectMapper());
         converter.setSupportedMediaTypes(Collections.singletonList(MediaType.APPLICATION_JSON));
-
         converters.add(converter);
     }
 
@@ -33,7 +34,15 @@ public class WebConfig extends WebMvcConfigurerAdapter{
     public MessageSource messageSource () {
         ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
         messageSource.setBasename("messages");
+        messageSource.setDefaultEncoding("UTF-8");
         return messageSource;
+    }
+
+    @Bean
+    public Locale locale(){
+        Locale defaultLocale = new Locale("en", "US");
+        Locale.setDefault(defaultLocale);
+        return defaultLocale;
     }
 
 }

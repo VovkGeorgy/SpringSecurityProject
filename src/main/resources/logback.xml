@@ -1,27 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!--<appender name="console" class="ch.qos.logback.core.ConsoleAppender">-->
-    <!--<encoder>-->
-    <!--<pattern>%.-19date;%.-1level;%logger;%msg%n</pattern>-->
-    <!--</encoder>-->
-    <!--&lt;!&ndash;<file>log.log</file>&ndash;&gt;-->
-    <!--&lt;!&ndash;<layout class="ch.qos.logback.classic.PatternLayout">&ndash;&gt;-->
-    <!--&lt;!&ndash;<append>true</append>&ndash;&gt;-->
-    <!--&lt;!&ndash;<Pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</Pattern>&ndash;&gt;-->
-    <!--&lt;!&ndash;</layout>&ndash;&gt;-->
-    <!--</appender>-->
-
-    <!--<logger name="org.springframework" level="info" />-->
-    <!--<logger name="a1s" level="debug" />-->
-
-    <!--<root level="info">-->
-    <!--<appender-ref ref="FILE" />-->
-    <!--</root>-->
-
-    <!--<root level="warn">-->
-    <!--<appender-ref ref="console" />-->
-    <!--</root>-->
-
     <appender name="FILE" class="ch.qos.logback.core.FileAppender">
         <!-- "application-name" is a variable -->
         <File>c:/Program Files/Apache Software Foundation/Tomcat 8.0/webapps/ROOT/WEB-INF/classes/logs/testLog.log
@@ -29,6 +7,10 @@
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>%d %p %t %c - %m%n</Pattern>
         </layout>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%-4r [%t] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
     </appender>
     <root level="debug">
         <appender-ref ref="FILE"/>

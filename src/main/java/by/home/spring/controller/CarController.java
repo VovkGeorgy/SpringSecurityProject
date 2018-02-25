@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,32 +33,41 @@ public class CarController {
 
     @RequestMapping(value = "/addEntity", method = RequestMethod.POST)
     public String getCarEntity(String mark, String regNumber, int mileage, int teacherId) {
+        logger.debug(messageSource.getMessage("object.creating", new Object[]{null}, Locale.getDefault()));
         CarEntity car = new CarEntity();
-        logger.debug("Create new object CarEntity", car);
+        logger.debug(messageSource.getMessage("object.create", new Object[]{car}, Locale.getDefault()));
         car.setMark(mark);
         car.setRegNumber(regNumber);
         car.setMileage(mileage);
         try {
             if (teacherService.getOne(teacherId) == null) throw new Exception();
         } catch (Exception e) {
-            logger.error("ERROR teacher by " + teacherId + " is not found! ", e);
+            logger.error(messageSource.getMessage("field.set.error", new Object[]{e}, Locale.getDefault()), e);
         }
         car.setTeacher(teacherService.getOne(teacherId));
         carService.saveAndFlush(car);
-        logger.debug("Object successfully saved", car);
+        logger.debug(messageSource.getMessage("object.save.successful", new Object[]{car}, Locale.getDefault()), car);
         return "Car successfully added" + car;
     }
 
     @RequestMapping(value = "/getAllCars", method = RequestMethod.GET)
     public List<CarEntity> getAllCars(ModelMap model) {
+        logger.debug(messageSource.getMessage("object.getAll", new Object[]{null}, Locale.getDefault()));
         return carService.findAll();
     }
 
-    @RequestMapping(value = "/getNames", method = RequestMethod.GET)
-    public String getNames(ModelMap model) {
-        Locale ruLocale = new Locale("ru", "RU");
-        Locale.setDefault(ruLocale);
-        return messageSource.getMessage("customer.name", new Object[]{"25"}, Locale.getDefault());
+    /**
+     * Set the locale configuration with a param 'locale'
+     *
+     * @param language - language, what we needed
+     * @param location - location, where you are
+     * @return message from locale settings
+     */
+    @RequestMapping(value = "/setLocale", method = RequestMethod.GET)
+    public String setLocale(String language, String location, ModelMap model) {
+        Locale defLocale = new Locale(language, location);
+        Locale.setDefault(defLocale);
+        return messageSource.getMessage("locale.changed", new Object[]{null}, Locale.getDefault());
     }
 
     @RequestMapping(value = "/updateEntity", method = RequestMethod.POST)
