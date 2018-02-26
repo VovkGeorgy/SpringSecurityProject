@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public interface TeacherEntityRepository extends JpaRepository<TeacherEntity, Integer> {
 
     /**
@@ -43,4 +45,12 @@ public interface TeacherEntityRepository extends JpaRepository<TeacherEntity, In
      */
     @Transactional
     TeacherEntity deleteByTeacherId(Integer teacherId);
+
+    /**
+     * This method find and return all entities of Teacher type
+     *
+     * @return List<TeacherEntity>
+     */
+    @Override
+    List<TeacherEntity> findAll();
 }

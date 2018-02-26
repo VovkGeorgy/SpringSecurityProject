@@ -33,42 +33,60 @@ public class StudentController {
 
     private static final Logger logger = LoggerFactory.getLogger(StudentController.class);
 
+    /**
+     * Method add Student entity with @params
+     * @param fio - student fio
+     * @param workGroup - student working group
+     * @param yearsOld - student age
+     * @param teacherId - student teacher
+     * @return - message
+     */
     @RequestMapping(value = "/addEntity", method = RequestMethod.POST)
     public String getStudentEntity(String fio, int workGroup, int yearsOld, int teacherId) {
         StudentEntity stud = new StudentEntity();
-        logger.debug("Create new object StudentEntity", stud);
         stud.setFio(fio);
         stud.setWorkGroup(workGroup);
         try {
             if (yearsOld < 18) throw new Exception();
         } catch (Exception e) {
-            logger.error("ERROR not right years old!", e);
+            logger.error(messageSource.getMessage("object.field.updating.error", new Object[]{stud}, Locale.getDefault()), e);
         }
         stud.setYearsOld(yearsOld);
         stud.setTeacher(teacherService.getOne(teacherId));
         studentService.saveAndFlush(stud);
-        logger.debug("Object successfully saved", stud);
-        return "student added" + stud;
+        logger.info(messageSource.getMessage("object.create.ok", new Object[]{stud}, Locale.getDefault()));
+        return messageSource.getMessage("object.create.ok", new Object[]{stud}, Locale.getDefault());
     }
 
+    /**
+     * Method return all students entity from dataBase to view page at JSON format
+     * @param model - model
+     * @return List<StudentEntity>
+     */
     @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
     public List<StudentEntity> getStudentsNames(ModelMap model) {
         return studentService.findAll();
     }
 
-    @RequestMapping(value = "/getNames", method = RequestMethod.GET)
-    public String getNames(ModelMap model) {
-        Locale ruLocale = new Locale("ru", "RU");
-        Locale.setDefault(ruLocale);
-        return messageSource.getMessage("customer.name", new Object[]{"25"}, Locale.getDefault());
-    }
-
+    /**
+     * Method select students entity by the input fio, and update them age
+     * @param yearsOld - students age
+     * @param fio - fio
+     * @param model - model
+     * @return - message
+     */
     @RequestMapping(value = "/updateEntity", method = RequestMethod.POST)
     public String updateSudentEntity(int yearsOld, String fio, ModelMap model) {
         studentService.updateStudentEntityYearsOld(yearsOld, fio);
-        return "Student yearsOld are updated!";
+        logger.info(messageSource.getMessage("object.field.updating.ок", new Object[]{null}, Locale.getDefault()));
+        return messageSource.getMessage("object.field.updating.ок", new Object[]{null}, Locale.getDefault());
     }
 
+    /**
+     * Method delete student Entity by student ID
+     * @param studId - student id
+     * @return - message
+     */
     @RequestMapping(value = "/deleteEntity", method = RequestMethod.POST)
     public String deleteStudentEntity(int studId) {
         return "Entity - " + studentService.deleteByStudentId(studId) + "was deleted";

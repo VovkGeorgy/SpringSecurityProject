@@ -31,51 +31,60 @@ public class CarController {
 
     private static final Logger logger = LoggerFactory.getLogger(CarController.class);
 
+    /**
+     * Method add Car entity with @params
+     * @param mark - car mark
+     * @param regNumber - car registration Number
+     * @param mileage - car mileage
+     * @param teacherId - teacher who driving the car
+     * @return - message "Car added"
+     */
     @RequestMapping(value = "/addEntity", method = RequestMethod.POST)
     public String getCarEntity(String mark, String regNumber, int mileage, int teacherId) {
-        logger.debug(messageSource.getMessage("object.creating", new Object[]{null}, Locale.getDefault()));
         CarEntity car = new CarEntity();
-        logger.debug(messageSource.getMessage("object.create", new Object[]{car}, Locale.getDefault()));
         car.setMark(mark);
         car.setRegNumber(regNumber);
         car.setMileage(mileage);
         try {
             if (teacherService.getOne(teacherId) == null) throw new Exception();
         } catch (Exception e) {
-            logger.error(messageSource.getMessage("field.set.error", new Object[]{e}, Locale.getDefault()), e);
+            logger.error(messageSource.getMessage("object.field.updating.error", new Object[]{car}, Locale.getDefault()), e);
         }
         car.setTeacher(teacherService.getOne(teacherId));
+        logger.info(messageSource.getMessage("object.create.ok", new Object[]{car}, Locale.getDefault()));
         carService.saveAndFlush(car);
-        logger.debug(messageSource.getMessage("object.save.successful", new Object[]{car}, Locale.getDefault()), car);
-        return "Car successfully added" + car;
+        return messageSource.getMessage("object.create.ok", new Object[]{car}, Locale.getDefault());
     }
 
+    /**
+     * Method return all cars entity from dataBase to view page at JSON format
+     * @param model - model
+     * @return - array with all car Entity
+     */
     @RequestMapping(value = "/getAllCars", method = RequestMethod.GET)
     public List<CarEntity> getAllCars(ModelMap model) {
-        logger.debug(messageSource.getMessage("object.getAll", new Object[]{null}, Locale.getDefault()));
         return carService.findAll();
     }
 
     /**
-     * Set the locale configuration with a param 'locale'
-     *
-     * @param language - language, what we needed
-     * @param location - location, where you are
-     * @return message from locale settings
+     * Method select car entity by the input register number, and update it mileage
+     * @param milleage - new mileage
+     * @param regNumber - register number with car we wanted
+     * @param model - model
+     * @return - message "car mileage are updated"
      */
-    @RequestMapping(value = "/setLocale", method = RequestMethod.GET)
-    public String setLocale(String language, String location, ModelMap model) {
-        Locale defLocale = new Locale(language, location);
-        Locale.setDefault(defLocale);
-        return messageSource.getMessage("locale.changed", new Object[]{null}, Locale.getDefault());
-    }
-
     @RequestMapping(value = "/updateEntity", method = RequestMethod.POST)
     public String updateCarEntity(int milleage, String regNumber, ModelMap model) {
         carService.updateCarEntityMileage(milleage, regNumber);
-        return "Car milleage are updated!";
+        logger.info(messageSource.getMessage("object.field.updating.ок", new Object[]{null}, Locale.getDefault()));
+        return messageSource.getMessage("object.field.updating.ок", new Object[]{null}, Locale.getDefault());
     }
 
+    /**
+     * Method delete Car Entity by carId
+     * @param carId - id of the car we wanted to remove
+     * @return - message and deleted Car Entity
+     */
     @RequestMapping(value = "/deleteEntity", method = RequestMethod.POST)
     public String deleteCarEntity(int carId) {
         return "Entity - " + carService.deleteCarEntityByCarId(carId) + "was deleted";

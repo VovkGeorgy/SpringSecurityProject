@@ -73,14 +73,11 @@ public class CarEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         CarEntity car = (CarEntity) o;
-
         if (!carId.equals(car.carId)) return false;
         if (mark != null ? !mark.equals(car.mark) : car.mark != null) return false;
         if (regNumber != null ? !regNumber.equals(car.regNumber) : car.regNumber != null) return false;
         if (mileage != null ? !mileage.equals(car.mileage) : car.mileage != null) return false;
-
         return true;
     }
 

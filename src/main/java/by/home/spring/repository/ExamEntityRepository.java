@@ -30,7 +30,8 @@ public interface ExamEntityRepository extends JpaRepository<ExamEntity, Integer>
     /**
      * This method update ticketNumber at ExamEntity where column exam_Type = examType
      *
-     * @param ticketNumber - new exam ticket Number, examType - current exam type
+     * @param ticketNumber - new exam ticket Number
+     * @param examType     - current exam type
      * @return int - count of changed rows
      */
     @Query(value = "update ExamEntity exam set exam.ticketNumber = ?1 where exam.examType= ?2")
@@ -39,8 +40,7 @@ public interface ExamEntityRepository extends JpaRepository<ExamEntity, Integer>
     /**
      * This method delete Exam where column examId = exam Id
      *
-     * @param examId
-     *            - exam Id
+     * @param examId - exam Id
      * @return ExamEntity
      */
     @Transactional
@@ -49,8 +49,7 @@ public interface ExamEntityRepository extends JpaRepository<ExamEntity, Integer>
     /**
      * This method returns Exam where column examId = exam Id
      *
-     * @param examId
-     *            - exam Id
+     * @param examId - exam Id
      * @return ExamEntity
      */
     ExamEntity findByExamId(Integer examId);
@@ -58,8 +57,7 @@ public interface ExamEntityRepository extends JpaRepository<ExamEntity, Integer>
     /**
      * This method returns Exam where column exam_type = examType
      *
-     * @param examType
-     *            - exam type
+     * @param examType - exam type
      * @return ExamEntity
      */
     @Query(value = "SELECT * FROM exam WHERE exam_type=?1", nativeQuery = true)
