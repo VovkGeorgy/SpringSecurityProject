@@ -1,4 +1,4 @@
-package by.home.spring;
+package by.home.spring.initialize;
 
 import by.home.spring.config.WebConfig;
 import org.springframework.web.WebApplicationInitializer;
