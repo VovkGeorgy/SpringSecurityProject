@@ -1,6 +1,5 @@
 package by.home.spring.config;
 
-import com.fasterxml.jackson.core.json.UTF8JsonGenerator;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +10,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.Collections;
@@ -43,6 +44,16 @@ public class WebConfig extends WebMvcConfigurerAdapter{
         Locale defaultLocale = new Locale("en", "US");
         Locale.setDefault(defaultLocale);
         return defaultLocale;
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("*").addResourceLocations("");
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("forward:/index.html");
     }
 
 }

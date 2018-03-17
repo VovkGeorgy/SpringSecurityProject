@@ -8,23 +8,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Locale;
 
-
-@Controller
+@CrossOrigin
+@RestController
 public class MainController {
 
     @Autowired
     MessageSource messageSource;
 
     @RequestMapping(value = {"/", "/welcome**"}, method = RequestMethod.GET)
-    @ResponseBody
     public String defaultPage() {
         return "This is default page!";
     }
