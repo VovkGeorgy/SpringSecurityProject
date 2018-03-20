@@ -2,6 +2,7 @@ package by.home.spring.repository;
 
 import by.home.spring.entity.StudentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,6 +35,8 @@ public interface StudentEntityRepository extends JpaRepository<StudentEntity, In
      * @param studentFio      - current StudentEntity fio
      * @return int - count of changed rows
      */
+    @Transactional
+    @Modifying
     @Query(value = "update StudentEntity student set student.yearsOld= ?1 where student.fio= ?2")
     int updateStudentEntityYearsOld(int studentYearsOld, String studentFio);
 
@@ -44,7 +47,7 @@ public interface StudentEntityRepository extends JpaRepository<StudentEntity, In
      * @return StudentEntity
      */
     @Transactional
-    StudentEntity deleteByStudentId(Integer studentId);
+    void deleteByStudentId(Integer studentId);
 
     /**
      * This method return all Student Entity

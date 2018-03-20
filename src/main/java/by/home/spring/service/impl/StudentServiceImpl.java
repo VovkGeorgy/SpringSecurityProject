@@ -67,9 +67,9 @@ public class StudentServiceImpl implements StudentService {
      * @return StudentEntity
      */
     @Override
-    public StudentEntity deleteByStudentId(Integer studentId) {
+    public void deleteByStudentId(Integer studentId) {
         logger.info(messageSource.getMessage("object.deleting", new Object[]{null}, Locale.getDefault()));
-        return repository.deleteByStudentId(studentId);
+        repository.deleteByStudentId(studentId);
     }
 
     /**

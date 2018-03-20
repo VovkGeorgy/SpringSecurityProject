@@ -37,7 +37,7 @@ public interface StudentService {
      * @param studentId - Student entity id
      * @return StudentEntity
      */
-    StudentEntity deleteByStudentId(Integer studentId);
+    void deleteByStudentId(Integer studentId);
 
     /**
      * This method return all Student Entity
@@ -45,4 +45,5 @@ public interface StudentService {
      * @return List<StudentEntity>
      */
     List<StudentEntity> findAll();
+
 }

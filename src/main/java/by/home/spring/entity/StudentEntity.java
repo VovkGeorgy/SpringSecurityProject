@@ -1,7 +1,6 @@
 package by.home.spring.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,7 +17,7 @@ public class StudentEntity implements Serializable {
     private TeacherEntity teacher;
     private Set<ResultOfExamEntity> resultOfExams = new HashSet<>(0);
 
-    public StudentEntity(){
+    public StudentEntity() {
     }
 
     @Id
@@ -64,17 +63,17 @@ public class StudentEntity implements Serializable {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "teacher_id", nullable = false)
+    @JoinColumn(name = "teacher_id")
     public TeacherEntity getTeacher() {
         return this.teacher;
     }
 
     public void setTeacher(TeacherEntity teacher) {
-        this.teacher= teacher;
+        this.teacher = teacher;
     }
 
     @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.student", cascade=CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.student", cascade = CascadeType.ALL)
     public Set<ResultOfExamEntity> getResultOfExam() {
         return this.resultOfExams;
     }

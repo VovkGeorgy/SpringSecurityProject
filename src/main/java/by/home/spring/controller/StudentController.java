@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.MessageSource;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,11 +35,13 @@ public class StudentController {
 
     /**
      * Method add Student entity with @params
-     * @param fio - student fio
+     *
+     * @param fio       - student fio
      * @param workGroup - student working group
-     * @param yearsOld - student age
+     * @param yearsOld  - student age
      * @param teacherId - student teacher
      * @return - message
+     * {@link Deprecated}
      */
     @RequestMapping(value = "/addEntity", method = RequestMethod.POST)
     public String getStudentEntity(String fio, int workGroup, int yearsOld, int teacherId) {
@@ -56,8 +60,22 @@ public class StudentController {
         return messageSource.getMessage("object.create.ok", new Object[]{stud}, Locale.getDefault());
     }
 
+    @RequestMapping(value = "/addStudent", method = RequestMethod.POST)
+    public ResponseEntity<StudentEntity> addStudent(@RequestBody StudentEntity student) {
+        StudentEntity newStud = new StudentEntity();
+        if (student != null) {
+            newStud.setFio(student.getFio());
+            newStud.setWorkGroup(student.getWorkGroup());
+            newStud.setYearsOld(student.getYearsOld());
+            newStud.setTeacher(null);
+            studentService.saveAndFlush(newStud);
+        }
+        return new ResponseEntity<StudentEntity>(newStud, HttpStatus.OK);
+    }
+
     /**
      * Method return all students entity from dataBase to view page at JSON format
+     *
      * @param model - model
      * @return List<StudentEntity>
      */
@@ -68,9 +86,10 @@ public class StudentController {
 
     /**
      * Method select students entity by the input fio, and update them age
+     *
      * @param yearsOld - students age
-     * @param fio - fio
-     * @param model - model
+     * @param fio      - fio
+     * @param model    - model
      * @return - message
      */
     @RequestMapping(value = "/updateEntity", method = RequestMethod.POST)
@@ -80,14 +99,34 @@ public class StudentController {
         return messageSource.getMessage("object.field.updating.ок", new Object[]{null}, Locale.getDefault());
     }
 
+    @RequestMapping(value = "/updateStudent", method = RequestMethod.POST)
+    public ResponseEntity<StudentEntity> updateStudent(@RequestBody StudentEntity student) {
+        StudentEntity newStud = studentService.getOne(student.getStudentId());
+        newStud.setFio(student.getFio());
+        newStud.setWorkGroup(student.getWorkGroup());
+        newStud.setYearsOld(student.getYearsOld());
+        newStud.setTeacher(teacherService.getOne(1));
+        return new ResponseEntity<StudentEntity>(newStud, HttpStatus.OK);
+    }
+
+
     /**
      * Method delete student Entity by student ID
+     *
      * @param studId - student id
      * @return - message
+     * {@link Deprecated}
      */
     @RequestMapping(value = "/deleteEntity", method = RequestMethod.POST)
     public String deleteStudentEntity(int studId) {
-        return "Entity - " + studentService.deleteByStudentId(studId) + "was deleted";
-
+        studentService.deleteByStudentId(studId);
+        return "student was deleted!";
     }
+
+    @RequestMapping(value = "/deleteStudent", method = RequestMethod.POST)
+    public void deleteStudent(@RequestBody StudentEntity student) {
+        studentService.deleteByStudentId(student.getStudentId());
+    }
+
+
 }

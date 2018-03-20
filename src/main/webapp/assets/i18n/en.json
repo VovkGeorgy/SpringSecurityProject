@@ -20,7 +20,8 @@
     "title": "Create student entity",
     "fio": "Fio",
     "workGroup": "Work Group",
-    "yearsOld": "Years Old"
+    "yearsOld": "Years Old",
+    "teacherId": "Teacher Id"
   },
   "teacher": {
     "naming": "Teacher",

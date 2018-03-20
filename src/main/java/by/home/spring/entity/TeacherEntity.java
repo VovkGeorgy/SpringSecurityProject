@@ -24,7 +24,7 @@ public class TeacherEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "teacher_id", nullable = false)
     public Integer getTeacherId() {
-        return teacherId;
+        return this.teacherId;
     }
 
     public void setTeacherId(Integer teacherId) {

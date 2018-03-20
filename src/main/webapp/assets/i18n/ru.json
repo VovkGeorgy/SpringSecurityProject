@@ -20,7 +20,8 @@
     "title": "Создать запись о студенте",
     "fio": "Фио",
     "workGroup": "Группа",
-    "yearsOld": "Возраст"
+    "yearsOld": "Возраст",
+    "teacherId": "Id учителя"
   },
   "teacher": {
     "naming": "Преподаватель",
