@@ -1,6 +1,7 @@
 package by.home.spring.controller;
 
 import by.home.spring.entity.StudentEntity;
+import by.home.spring.entity.TeacherEntity;
 import by.home.spring.service.StudentService;
 import by.home.spring.service.TeacherService;
 import org.slf4j.Logger;
@@ -67,7 +68,7 @@ public class StudentController {
             newStud.setFio(student.getFio());
             newStud.setWorkGroup(student.getWorkGroup());
             newStud.setYearsOld(student.getYearsOld());
-            newStud.setTeacher(null);
+            newStud.setTeacher(teacherService.getOne(1));
             studentService.saveAndFlush(newStud);
         }
         return new ResponseEntity<StudentEntity>(newStud, HttpStatus.OK);

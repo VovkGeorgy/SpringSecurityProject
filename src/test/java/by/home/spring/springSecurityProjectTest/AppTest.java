@@ -1,4 +1,4 @@
-package by.home.spring.springJpaTest;
+package by.home.spring.springSecurityProjectTest;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
