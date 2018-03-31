@@ -20,6 +20,12 @@ public class StudentEntity implements Serializable {
     public StudentEntity() {
     }
 
+    public StudentEntity(String fio, Integer weorkGroup, Integer yearsOld) {
+        this.fio = fio;
+        this.workGroup = weorkGroup;
+        this.yearsOld = yearsOld;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "student_id", nullable = false)

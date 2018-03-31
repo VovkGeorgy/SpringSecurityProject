@@ -56,4 +56,6 @@ public interface StudentEntityRepository extends JpaRepository<StudentEntity, In
      */
     @Override
     List<StudentEntity> findAll();
+
+    StudentEntity findByFio(String fio);
 }

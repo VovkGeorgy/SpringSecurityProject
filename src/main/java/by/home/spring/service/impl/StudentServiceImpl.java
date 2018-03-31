@@ -67,9 +67,10 @@ public class StudentServiceImpl implements StudentService {
      * @return StudentEntity
      */
     @Override
-    public void deleteByStudentId(Integer studentId) {
+    public String deleteByStudentId(Integer studentId) {
         logger.info(messageSource.getMessage("object.deleting", new Object[]{null}, Locale.getDefault()));
         repository.deleteByStudentId(studentId);
+        return "Test String";
     }
 
     /**
@@ -81,5 +82,10 @@ public class StudentServiceImpl implements StudentService {
     public List<StudentEntity> findAll() {
         logger.info(messageSource.getMessage("object.findingAll", new Object[]{null}, Locale.getDefault()));
         return repository.findAll();
+    }
+
+    @Override
+    public StudentEntity findByFio(String fio) {
+        return repository.findByFio(fio);
     }
 }

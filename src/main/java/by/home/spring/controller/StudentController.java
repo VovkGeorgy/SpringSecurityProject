@@ -80,9 +80,16 @@ public class StudentController {
      * @param model - model
      * @return List<StudentEntity>
      */
+//    @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
+//    public List<StudentEntity> getStudentsNames(ModelMap model) {
+//        List<StudentEntity> all = studentService.findAll();
+//        return all;
+//    }
+
     @RequestMapping(value = "/getAllStudents", method = RequestMethod.GET)
     public List<StudentEntity> getStudentsNames(ModelMap model) {
-        return studentService.findAll();
+        List<StudentEntity> all = studentService.findAll();
+        return all;
     }
 
     /**
@@ -118,10 +125,9 @@ public class StudentController {
      * @return - message
      * {@link Deprecated}
      */
-    @RequestMapping(value = "/deleteEntity", method = RequestMethod.POST)
-    public String deleteStudentEntity(int studId) {
-        studentService.deleteByStudentId(studId);
-        return "student was deleted!";
+    @RequestMapping(value = "/deleteEntity/{id}", method = RequestMethod.POST)
+    public String deleteStudentEntity(@PathVariable("id") int studId) {
+        return studentService.deleteByStudentId(studId);
     }
 
     @RequestMapping(value = "/deleteStudent", method = RequestMethod.POST)
